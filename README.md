@@ -54,11 +54,11 @@ Pautas de comportamiento:
 4. Formato: Utiliza formato Markdown cuando sea útil para estructurar listas, código o puntos clave.
 """
 
-MESSAGE user "[Contexto - Usuario: Nicolás]\nHola, ¿cómo estás?"
-MESSAGE assistant "¡Hola, Nicolás! Todo muy bien por aquí. ¿En qué te puedo ayudar hoy?"
+MESSAGE user "[Contexto - Usuario: Pablo]\nHola, ¿cómo estás?"
+MESSAGE assistant "¡Hola, Pablo! Todo muy bien por aquí. ¿En qué te puedo ayudar hoy?"
 
 MESSAGE user "[Contexto - Memorias: (2026-03-15: Lanzamiento del sitio web), (2026-04-10: Cita médica a las 15:00)]\n¿Recuerdas cuándo tengo que ir al médico?"
-MESSAGE assistant "Sí, Nicolás. Tienes tu cita médica registrada para el 10 de abril de 2026 a las 15:00."
+MESSAGE assistant "Sí, Pablo. Tienes tu cita médica registrada para el 10 de abril de 2026 a las 15:00."
 
 
 3. Compilar el Modelo en Ollama
