@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Asistente Local con Memoria</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- CABECERA Y CONTROLES -->
+    <header class="header-chat">
+        <h1>Asistente Local</h1>
+        
+        <div class="acciones-header">
+            <!-- 1. Personalización -->
+            <button class="btn-exportar" onclick="cambiarNombreUsuario()">👤 Nombre</button>
+
+            <!-- 2. Menú de Memorias -->
+            <div class="dropdown-memoria">
+                <button class="btn-exportar" onclick="toggleMenuMemoria(event)">📌 Memorias ▾</button>
+                <div id="menu-memoria" class="dropdown-contenido">
+                    <button onclick="agregarEventoImportante()">➕ Anotar evento</button>
+                    <button onclick="verEventosImportantes()">📋 Ver/Editar eventos</button>
+                </div>
+            </div>
+
+            <!-- 3. Menú de Respaldos e Historial -->
+            <div class="dropdown-memoria">
+                <button class="btn-exportar" onclick="toggleMenuRespaldos(event)">💾 Historial y Backup ▾</button>
+                <div id="menu-respaldos" class="dropdown-contenido">
+                    <button onclick="exportarHistorialTxt()">📥 Descargar Historial (.txt)</button>
+                    <button onclick="descargarRespaldoJSON()">💾 Guardar Respaldo (.json)</button>
+                    <button onclick="document.getElementById('input-cargar-json').click()">📂 Cargar Respaldo (.json)</button>
+                </div>
+            </div>
+
+            <!-- Input invisible para cargar archivos JSON -->
+            <input type="file" id="input-cargar-json" accept=".json" style="display: none;" onchange="cargarRespaldoJSON(event)">
+
+            <!-- 4. Acción Destructiva (Separada al final) -->
+            <button class="btn-reiniciar" onclick="borrarHistorial()">⚠️ Reiniciar Chat</button>
+        </div>
+    </header>
+
+    <!-- ÁREA PRINCIPAL DEL CHAT -->
+    <main class="contenedor-principal">
+        <div id="contenedor-chat" class="contenedor-chat">
+            <!-- Los mensajes se renderizan dinámicamente desde script.js -->
+        </div>
+
+        <!-- Indicador de "pensando..." -->
+        <div id="indicador-cargando" class="indicador-cargando" style="display: none;">
+            <span>El asistente está pensando...</span>
+        </div>
+    </main>
+
+    <!-- ZONA DE ENTRADA DE TEXTO -->
+    <footer class="footer-chat">
+        <div class="caja-entrada">
+            <textarea id="input-mensaje" placeholder="Escribe tu mensaje aquí..." rows="1"></textarea>
+            <button class="btn-enviar" onclick="enviarMensaje()">Enviar</button>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: REGISTRAR O EDITAR EVENTO (ÚNICO) -->
+    <div id="modal-agregar-evento" class="modal" style="display: none;">
+        <div class="contenido-modal">
+            <h2 id="titulo-modal-evento">✨ Nueva Memoria</h2>
+            <p class="subtitulo-modal">Registra o modifica un evento para que el asistente lo tenga en cuenta.</p>
+
+            <!-- Campo oculto para rastrear el índice si estamos editando (-1 si es nuevo) -->
+            <input type="hidden" id="index-evento-editar" value="-1" />
+
+            <div class="campo-form">
+                <label for="input-fecha-evento">Fecha del evento:</label>
+                <input type="date" id="input-fecha-evento" class="input-modal" />
+            </div>
+
+            <div class="campo-form">
+                <label for="input-detalle-evento">¿Qué sucedió?:</label>
+                <textarea id="input-detalle-evento" class="input-modal" rows="3" placeholder="Escribe aquí los detalles del día..."></textarea>
+            </div>
+
+            <div class="acciones-modal">
+                <button class="btn-secundario" onclick="cerrarModalAgregarEvento()">Cancelar</button>
+                <button class="btn-primario" onclick="guardarNuevoEvento()">Guardar Memoria</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: VER / GESTIONAR MEMORIAS -->
+    <div id="modal-eventos" class="modal" style="display: none;">
+        <div class="contenido-modal">
+            <h2>📌 Memorias Registradas</h2>
+            <div id="lista-eventos" class="lista-eventos"></div>
+            <button class="btn-secundario" onclick="cerrarModalEventos()">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- SCRIPT PRINCIPAL -->
+    <script src="script.js"></script>
+</body>
+</html>
